@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置Struts2常量 -->
+
+    <!-- 开启开发模式，只在项目开发阶段配置 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 配置访问后缀为action，即只有加了.action后缀的url请求会被struts2框架拦截处理 -->
+    <constant name="struts.action.extension" value="action"/>
+    <!-- 把主题配置成simple -->
+	<constant name="struts.ui.theme" value="simple" />
+	
+	<package name="home-package" extends="struts-default" namespace="/home">
+		<!-- name的值为浏览器的访问地址 -->
+		
+		<!-- 使用通配符配置 -->
+		<!-- {1}代表取第一个*号匹配的内容 -->
+		<!-- 要求：HomeAction中负责页面转发的方法名，返回逻辑视图名，页面名称三者保持一致 -->
+		<action name="homeAction_*" class="top.qjmsystem.express.action.HomeAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/{1}.jsp</result>
+		</action>
+	</package>
+
+	<!-- 用户（管理员）管理模块 -->
+	<package name="user-package" extends="struts-default"
+		namespace="/user">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="userAction_*" class="top.qjmsystem.express.action.UserAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/user/{1}.jsp</result>
+			<result name="list" type="redirect">userAction_listUI.action</result>
+		</action>
+	</package>
+
+
+
+
+	<!-- 快递员管理模块 -->
+	<package name="Courier-package" extends="struts-default"
+		namespace="/courier">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="courierAction_*" class="top.qjmsystem.express.action.CourierAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/courier/{1}.jsp</result>
+			<result name="list" type="redirect">courierAction_listUI.action</result>
+		</action>
+	</package>
+	
+	
+	<!-- 登录模块 -->
+	<package name="login-package" extends="struts-default"
+		namespace="/login">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="loginAction_*" class="top.qjmsystem.express.action.LoginAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/{1}.jsp</result>
+
+			<!-- 登录失败，重新返回登录页面 -->
+			<result name="fail">/WEB-INF/jsp/loginUI.jsp</result>
+
+			<!-- 登录成功，跳转主页 -->
+			<result name="home" type="redirectAction">
+				<param name="namespace">/home</param>
+				<param name="actionName">homeAction_frame.action</param>
+			</result>
+		</action>
+
+	</package>
+
+
+	<!-- 物流管理模块 -->
+	<package name="Goods-action" extends="struts-default"
+		namespace="/goods">
+		<action name="goodsAction_*" class="top.qjmsystem.express.action.GoodsAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/goods/{1}.jsp</result>
+			<result name="list" type="redirect">goodsAction_listUI.action</result>
+		</action>
+	</package>
+
+	<!-- 微信小程序 -->
+	<package name="WetChat-action" extends="struts-default"
+		namespace="/WetChat">
+		<action name="WetChatAction_*" class="top.qjmsystem.express.action.WetChatAction"
+			method="{1}">
+
+		</action>
+	</package>
+	
+		<!-- App -->
+	<package name="App-action" extends="struts-default"
+		namespace="/App">
+		<action name="AppAction_*" class="top.qjmsystem.express.action.AppAction"
+			method="{1}">
+
+		</action>
+	</package>
+
+
+	<!-- 串口数据显示 -->
+	<package name="SerialPort-action" extends="struts-default"
+		namespace="/serialPort">
+		<action name="serialPortAction_*" class="top.qjmsystem.express.action.SerialPortAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/serialPort/{1}.jsp</result>
+			<result name="list" type="redirect">goodsAction_listUI.action</result>
+		</action>
+
+
+	</package>
+	
+	
+	
+	<!-- 用户管理模块 -->
+	<package name="consumer-package" extends="struts-default"
+		namespace="/consumer">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="consumerAction_*" class="top.qjmsystem.express.action.ConsumerAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/consumer/{1}.jsp</result>
+			<result name="list" type="redirect">consumerAction_listUI.action</result>
+		</action>
+	</package>
+	
+	
+	
+	<!-- 快递信息表模块-->
+	<package name="goodsInfo-package" extends="struts-default"
+		namespace="/goodsInfo">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="goodsInfoAction_*" class="top.qjmsystem.express.action.GoodsInfoAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/goodsInfo/{1}.jsp</result>
+			<result name="list" type="redirect">goodsInfoAction_listUI.action</result>
+		</action>
+	</package>
+	
+	
+	<!-- 快递位置信息模块-->
+	<package name="goodsPosition-package" extends="struts-default"
+		namespace="/goodsPosition">
+		<!-- name的值为浏览器的访问地址 -->
+		<action name="goodsPositionAction_*" class="top.qjmsystem.express.action.GoodsPositionAction"
+			method="{1}">
+			<result name="{1}">/WEB-INF/jsp/index/goodsPosition/{1}.jsp</result>
+			<result name="list" type="redirect">goodsPositionAction_listUI.action</result>
+		</action>
+	</package>
+	
+	
+	
+</struts>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	
+	<!-- 配置c3p0连接池 -->
+	<!-- <bean>的意思相当于在代码中new一个对象的意思 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 配置数据库连接属性 -->
+		<!-- 数据库驱动 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<!-- 数据库连接地址 -->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/qjmsystem?charecterEncoding=utf8"/>
+		<!-- 用户名 -->
+		<property name="user" value="root"/>
+		<!-- 密码 -->
+		<property name="password" value="mysql"/>
+		<!-- 最小连接数 -->
+		<property name="minPoolSize" value="3"/>
+		<!-- 最大连接数 -->
+		<property name="maxPoolSize" value="10"/>
+		<!-- 初始化连接数 -->
+		<property name="initialPoolSize" value="3"/>
+	</bean>
+	
+	
+	<!-- spring整合hibernate的配置 -->
+	<!-- 配置连接工厂，生成数据库的操作对象，以便做数据库的增删改查操作：Session -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 配置数据库连接池获取连接 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- hibernate的参数配置 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- 数据库方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 显示sql语句-->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- 格式化SQL语句 -->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- create：根据映射关系生成表 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		
+		<!-- 建立对象与数据库表的映射关系 -->
+		<property name="packagesToScan" value="top.qjmsystem.express.bean"/>
+		
+	</bean>
+	
+	
+	<!-- 事务管理控制器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	<!-- 使用注解控制事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
+	<!-- 使用context 命名空间，通知spring 扫描指定目录，进行注解的解析 -->
+	<!-- 开启注解扫描 -->
+	<context:component-scan base-package="top.qjmsystem.express"/>
+	
+	
+</beans>

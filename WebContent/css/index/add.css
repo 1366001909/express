@@ -1,0 +1,45 @@
+	input:focus,textarea:focus{
+		border:1px solid #f00;
+		background:#fcc;
+	}
+	
+	textarea{
+		width:400px;
+		height:50px;
+	}
+	div{
+		margin:5px;
+		width:600px;
+		height:40px;
+	}
+	body
+	{
+		font-size:12px;
+		font-family:Microsoft YaHei;
+			
+	}
+	.left{
+		display:block;
+		float:left;
+		width: 80px;
+	 	padding-left: 2px;
+		font-size:10pt;font-family:Microsoft YaHei;
+		alignment-baseline:middle;
+	
+	}
+	.submit{
+		margin-top:40px;
+		margin-left:250px;
+		alignment-adjust:central;
+	}
+	.button{
+		 font:10pt;
+		 font-family: Microsoft YaHei ;
+		 color:#FFF;
+		 background-color:#03C;
+		 
+		}
+	select option{
+		font-size:10px;
+		font-family:Microsoft YaHei;
+	}
