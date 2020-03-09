@@ -25,10 +25,6 @@ public class UserTest {
 		// 查询所有信息
 		List<User> users = userService.findObjects("from User");
 		System.out.println(users);
-<<<<<<< HEAD
 		System.out.println("right...测试冲突");
-=======
-		System.out.println("left...测试冲突");
->>>>>>> branch 'master' of https://github.com/1366001909/express.git
 	}
 }
