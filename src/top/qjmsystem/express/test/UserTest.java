@@ -25,6 +25,6 @@ public class UserTest {
 		// 查询所有信息
 		List<User> users = userService.findObjects("from User");
 		System.out.println(users);
-		System.out.println("right...测试冲突");
+		System.out.println("hot_fix分支,修复bug");
 	}
 }
